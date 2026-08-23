@@ -1,0 +1,163 @@
+/* components/report-card/report-card.wxss */
+.report-card {
+  position: relative;
+  padding: 24rpx;
+  margin: 0 30rpx 20rpx 30rpx;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+}
+
+.location-icon {
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.location-text {
+  font-size: 30rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.card-body {
+  margin-bottom: 16rpx;
+}
+
+.desc-label {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.desc-text {
+  font-size: 28rpx;
+  color: #333;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-bottom: 16rpx;
+}
+
+.image-wrap {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+}
+
+.card-image {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  background: #f0f0f0;
+}
+
+.image-error {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 8rpx;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10rpx;
+  box-sizing: border-box;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.reporter {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.reporter-id {
+  font-size: 24rpx;
+  color: #bbb;
+}
+
+.footer-right {
+  display: flex;
+  gap: 16rpx;
+}
+
+.action-btn {
+  padding: 8rpx 20rpx;
+  border-radius: 6rpx;
+  font-size: 24rpx;
+}
+
+.edit-btn {
+  color: #1AAD19;
+  border: 1rpx solid #1AAD19;
+}
+
+.delete-btn {
+  color: #E74C3C;
+  border: 1rpx solid #E74C3C;
+}
+
+.checkbox-wrapper {
+  position: absolute;
+  top: 24rpx;
+  right: 24rpx;
+}
+
+.checkbox {
+  width: 40rpx;
+  height: 40rpx;
+  border: 2rpx solid #CCCCCC;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF;
+}
+
+.checkbox.checked {
+  background: #1AAD19;
+  border-color: #1AAD19;
+}
+
+.checkbox.checked text {
+  color: #FFF;
+  font-size: 24rpx;
+  font-weight: bold;
+}

@@ -1,0 +1,141 @@
+<!-- pages/report-detail/report-detail.wxml - 隐患详情 -->
+<view class="page">
+  <scroll-view scroll-y class="scroll-container">
+    <view class="container">
+      <!-- 加载中 -->
+      <view class="loading-container" wx:if="{{loading}}">
+        <text>加载中...</text>
+      </view>
+
+      <!-- 详情内容 -->
+      <view class="detail-card card" wx:if="{{!loading && report}}">
+        <!-- 部门信息 -->
+        <view class="detail-section" wx:if="{{report.department1 || report.department2}}">
+          <view class="section-title">部门信息</view>
+          <view class="info-row" wx:if="{{report.department1}}">
+            <text class="info-label">一级部门：</text>
+            <text class="info-value">{{report.department1}}</text>
+          </view>
+          <view class="info-row" wx:if="{{report.department2}}">
+            <text class="info-label">二级部门：</text>
+            <text class="info-value">{{report.department2}}</text>
+          </view>
+        </view>
+
+        <!-- 地点 -->
+        <view class="detail-section">
+          <view class="section-title">地点</view>
+          <view class="info-value location-value">
+            <text>📍 {{report.location || '无'}}</text>
+          </view>
+        </view>
+
+        <!-- 隐患照片 -->
+        <view class="detail-section">
+          <view class="section-title">隐患照片</view>
+          <view class="image-grid">
+            <image 
+              wx:for="{{hazardImageUrls}}" 
+              wx:key="index"
+              wx:for-index="idx"
+              class="detail-image" 
+              src="{{item}}" 
+              mode="aspectFill"
+              catchtap="previewImage"
+              data-index="{{idx}}"
+              data-type="hazard"
+              data-src="{{item}}"
+              binderror="onImageError"
+              lazy-load
+            />
+          </view>
+          <view class="no-data" wx:if="{{hazardImageUrls.length === 0}}">
+            <text>无</text>
+          </view>
+        </view>
+
+        <!-- 隐患说明 -->
+        <view class="detail-section">
+          <view class="section-title">隐患说明</view>
+          <view class="info-value text-block">{{report.hazardDescription || '无'}}</view>
+        </view>
+
+        <!-- 原因分析 -->
+        <view class="detail-section" wx:if="{{report.causeAnalysis}}">
+          <view class="section-title">隐患产生的原因分析</view>
+          <view class="info-value text-block">{{report.causeAnalysis}}</view>
+        </view>
+
+        <!-- 整改建议 -->
+        <view class="detail-section" wx:if="{{report.suggestedMeasures}}">
+          <view class="section-title">建议整改措施/要求</view>
+          <view class="info-value text-block">{{report.suggestedMeasures}}</view>
+        </view>
+
+        <!-- 验收照片 -->
+        <view class="detail-section">
+          <view class="section-title">验收照片</view>
+          <view class="image-grid">
+            <image 
+              wx:for="{{acceptanceImageUrls}}" 
+              wx:key="index"
+              wx:for-index="idx"
+              class="detail-image" 
+              src="{{item}}" 
+              mode="aspectFill"
+              catchtap="previewImage"
+              data-index="{{idx}}"
+              data-type="acceptance"
+              data-src="{{item}}"
+              binderror="onImageError"
+              lazy-load
+            />
+          </view>
+          <view class="no-data" wx:if="{{acceptanceImageUrls.length === 0}}">
+            <text>无</text>
+          </view>
+        </view>
+
+        <!-- 验收人及时间 -->
+        <view class="detail-section">
+          <view class="section-title">验收人及验收时间</view>
+          <view class="info-row">
+            <text class="info-label">验收人：</text>
+            <text class="info-value">{{report.acceptor || '无'}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">验收时间：</text>
+            <text class="info-value">{{report.acceptanceTime || '无'}}</text>
+          </view>
+        </view>
+
+        <!-- 报告人信息 -->
+        <view class="detail-section">
+          <view class="section-title">报告人信息</view>
+          <view class="info-row">
+            <text class="info-label">报告人：</text>
+            <text class="info-value">{{report.reporter || '无'}}</text>
+          </view>
+          <view class="info-row">
+            <text class="info-label">工号：</text>
+            <text class="info-value">{{report.reporterId || '无'}}</text>
+          </view>
+        </view>
+
+        <!-- 提交时间 -->
+        <view class="detail-section">
+          <view class="section-title">提交时间</view>
+          <view class="info-value">{{report.createTimeText || ''}}</view>
+        </view>
+      </view>
+
+      <!-- 未找到 -->
+      <view class="empty-state" wx:if="{{!loading && !report}}">
+        <view class="empty-icon">📄</view>
+        <view class="empty-text">未找到该记录</view>
+      </view>
+
+      <view style="height: 40rpx;"></view>
+    </view>
+  </scroll-view>
+</view>

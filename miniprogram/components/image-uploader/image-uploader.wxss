@@ -1,0 +1,84 @@
+/* components/image-uploader/image-uploader.wxss */
+.image-uploader {
+  margin-bottom: 30rpx;
+}
+
+.upload-label {
+  font-size: 28rpx;
+  color: #333;
+  margin-bottom: 12rpx;
+}
+
+.upload-hint {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.upload-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+}
+
+.image-item {
+  position: relative;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+}
+
+.delete-btn {
+  position: absolute;
+  top: -4rpx;
+  right: -4rpx;
+  width: 44rpx;
+  height: 44rpx;
+  background: #E74C3C;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-icon {
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.add-btn {
+  width: 200rpx;
+  height: 200rpx;
+  border: 2rpx dashed #CCCCCC;
+  border-radius: 8rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FAFAFA;
+}
+
+.add-icon {
+  font-size: 60rpx;
+  color: #CCCCCC;
+  line-height: 1;
+}
+
+.add-text {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+.upload-progress {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #1AAD19;
+}

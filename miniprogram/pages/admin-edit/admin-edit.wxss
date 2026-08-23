@@ -1,0 +1,2 @@
+/* pages/admin-edit/admin-edit.wxss - 复用 report 页面样式 */
+@import "/pages/report/report.wxss";

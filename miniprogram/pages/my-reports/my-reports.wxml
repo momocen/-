@@ -1,0 +1,60 @@
+<!-- pages/my-reports/my-reports.wxml - 我的隐患记录列表 -->
+<view class="page">
+  <!-- 未登录提示 -->
+  <view class="empty-state" wx:if="{{!isLoggedIn}}">
+    <view class="empty-icon">🔒</view>
+    <view class="empty-text">请先登录后查看记录</view>
+    <button class="go-login-btn" bindtap="goToLogin">去登录</button>
+  </view>
+
+  <!-- 记录列表 -->
+  <view wx:else>
+    <!-- 统计信息 -->
+    <view class="stats-bar card">
+      <view class="stat-item">
+        <text class="stat-num">{{totalCount}}</text>
+        <text class="stat-label">总上报数</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-num">{{monthCount}}</text>
+        <text class="stat-label">本月上报</text>
+      </view>
+    </view>
+
+    <!-- 列表 -->
+    <view class="report-list" wx:if="{{reports.length > 0}}">
+      <report-card
+        wx:for="{{reports}}"
+        wx:key="_id"
+        report="{{item}}"
+        showActions="{{true}}"
+        bind:tap="onReportTap"
+        bind:edit="onReportEdit"
+        bind:delete="onReportDelete"
+      />
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-state" wx:if="{{reports.length === 0 && !loading}}">
+      <view class="empty-icon">📋</view>
+      <view class="empty-text">暂无上报记录</view>
+      <button class="go-report-btn" bindtap="goToReport">去上报</button>
+    </view>
+
+    <!-- 调试信息 -->
+    <view class="debug-bar" wx:if="{{debugInfo}}" style="margin: 12rpx 24rpx; padding: 16rpx 24rpx; background: #FFF3CD; border-radius: 8rpx; font-size: 24rpx; color: #856404; line-height: 1.6;">
+      <text>🔍 {{debugInfo}}</text>
+    </view>
+
+    <!-- 加载更多 -->
+    <view class="loading-more" wx:if="{{hasMore && reports.length > 0}}">
+      <text>{{loadingMore ? '加载中...' : '上拉加载更多'}}</text>
+    </view>
+
+    <!-- 已全部加载 -->
+    <view class="loading-more" wx:if="{{!hasMore && reports.length > 0}}">
+      <text style="color: #CCC;">— 已加载全部记录 —</text>
+    </view>
+  </view>
+</view>

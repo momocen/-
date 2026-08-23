@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "report-card": "/components/report-card/report-card"
+  },
+  "navigationBarTitleText": "管理后台",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50
+}

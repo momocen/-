@@ -1,0 +1,99 @@
+<!-- pages/index/index.wxml - 首页（登录入口） -->
+<view class="page">
+  <!-- 顶部Logo区域 -->
+  <view class="header">
+    <view class="logo-container">
+      <image class="logo" src="/images/logo.png" mode="aspectFit" wx:if="{{false}}"></image>
+      <view class="logo-placeholder">🔍</view>
+    </view>
+    <view class="app-name">安全隐患排查上报系统</view>
+    <view class="app-desc">及时发现 · 快速上报 · 保障安全</view>
+  </view>
+
+  <!-- 未登录状态 -->
+  <view class="login-section" wx:if="{{!isLoggedIn}}">
+    <view class="section-title">请选择登录方式</view>
+    
+    <!-- 微信用户登录 -->
+    <button class="login-btn wx-login-btn" bindtap="handleWxLogin" loading="{{loading}}">
+      <text class="login-icon">💬</text>
+      <text>微信用户登录</text>
+    </button>
+    <view class="login-hint">使用微信授权一键登录，无需账号密码</view>
+    
+    <!-- 分隔线 -->
+    <view class="or-divider">
+      <view class="line"></view>
+      <text class="or-text">或</text>
+      <view class="line"></view>
+    </view>
+    
+    <!-- 管理员登录 -->
+    <button class="login-btn admin-login-btn" bindtap="goToAdminLogin">
+      <text class="login-icon">🔑</text>
+      <text>管理员登录</text>
+    </button>
+    <view class="login-hint">使用管理员账号密码登录管理后台</view>
+  </view>
+
+  <!-- 已登录状态 -->
+  <view class="logged-in-section" wx:if="{{isLoggedIn}}">
+    <view class="welcome-card card">
+      <view class="welcome-text">欢迎使用安全隐患排查上报系统</view>
+      <view class="user-type-tag" wx:if="{{userType === 'admin'}}">
+        <text class="tag tag-danger">管理员</text>
+      </view>
+      <view class="user-type-tag" wx:else>
+        <text class="tag tag-primary">普通用户</text>
+      </view>
+    </view>
+
+    <!-- 功能入口 -->
+    <view class="feature-list">
+      <!-- 隐患上报 -->
+      <view class="feature-card card" bindtap="goToReport">
+        <view class="feature-icon">📋</view>
+        <view class="feature-info">
+          <view class="feature-title">隐患上报</view>
+          <view class="feature-desc">提交安全隐患信息</view>
+        </view>
+        <view class="feature-arrow">›</view>
+      </view>
+
+      <!-- 我的记录 -->
+      <view class="feature-card card" bindtap="goToMyReports">
+        <view class="feature-icon">📂</view>
+        <view class="feature-info">
+          <view class="feature-title">我的记录</view>
+          <view class="feature-desc">查看已提交的隐患记录</view>
+        </view>
+        <view class="feature-arrow">›</view>
+      </view>
+
+      <!-- 管理后台（仅管理员可见） -->
+      <view class="feature-card card" wx:if="{{userType === 'admin'}}" bindtap="goToAdminDashboard">
+        <view class="feature-icon">⚙️</view>
+        <view class="feature-info">
+          <view class="feature-title">管理后台</view>
+          <view class="feature-desc">管理所有隐患记录与导出</view>
+        </view>
+        <view class="feature-arrow">›</view>
+      </view>
+
+      <!-- 修改密码（仅管理员可见） -->
+      <view class="feature-card card" wx:if="{{userType === 'admin'}}" bindtap="goToChangePassword">
+        <view class="feature-icon">🔒</view>
+        <view class="feature-info">
+          <view class="feature-title">修改密码</view>
+          <view class="feature-desc">修改管理员登录密码</view>
+        </view>
+        <view class="feature-arrow">›</view>
+      </view>
+    </view>
+
+    <!-- 退出登录 -->
+    <view class="logout-section">
+      <button class="logout-btn" bindtap="handleLogout">退出登录</button>
+    </view>
+  </view>
+</view>

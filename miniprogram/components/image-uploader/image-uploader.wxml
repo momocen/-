@@ -1,0 +1,38 @@
+<!-- components/image-uploader/image-uploader.wxml - 图片上传组件 -->
+<view class="image-uploader">
+  <view class="upload-label">
+    <text class="{{required ? 'required' : ''}}">{{label}}</text>
+    <text class="upload-hint" wx:if="{{showHint}}">（{{maxCount}}张以内，自动压缩至400×600）</text>
+  </view>
+  
+  <view class="upload-container">
+    <!-- 已上传的图片 -->
+    <view class="image-item" wx:for="{{images}}" wx:key="index">
+      <image 
+        class="preview-image" 
+        src="{{item}}" 
+        mode="aspectFill"
+        catchtap="previewImage"
+        data-index="{{index}}"
+      />
+      <view class="delete-btn" bindtap="deleteImage" data-index="{{index}}">
+        <text class="delete-icon">×</text>
+      </view>
+    </view>
+    
+    <!-- 添加按钮 -->
+    <view 
+      class="add-btn" 
+      wx:if="{{images.length < maxCount}}"
+      bindtap="handleAddImage"
+    >
+      <view class="add-icon">+</view>
+      <view class="add-text">添加图片</view>
+    </view>
+  </view>
+  
+  <!-- 上传进度提示 -->
+  <view class="upload-progress" wx:if="{{uploading}}">
+    <text>正在压缩上传中...</text>
+  </view>
+</view>

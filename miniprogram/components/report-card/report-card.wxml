@@ -1,0 +1,54 @@
+<!-- components/report-card/report-card.wxml - 隐患记录卡片组件 -->
+<view class="report-card card" bindtap="handleTap">
+  <!-- 顶部：地点 + 时间 -->
+  <view class="card-header">
+    <view class="location">
+      <text class="location-icon">📍</text>
+      <text class="location-text">{{report.location || '未知地点'}}</text>
+    </view>
+    <text class="time">{{report.createTimeText || ''}}</text>
+  </view>
+  
+  <!-- 隐患说明 -->
+  <view class="card-body">
+    <text class="desc-label">隐患说明：</text>
+    <text class="desc-text">{{report.hazardDescription || '无'}}</text>
+  </view>
+  
+  <!-- 图片预览 -->
+  <view class="card-images" wx:if="{{previewImages.length > 0}}">
+    <view class="image-wrap" wx:for="{{previewImages}}" wx:key="index" wx:for-item="img" wx:for-index="idx">
+      <image 
+        class="card-image" 
+        src="{{img}}" 
+        mode="aspectFill"
+        catchtap="previewImage"
+        data-index="{{idx}}"
+        bindload="onImageLoad"
+        binderror="onImageError"
+        data-url="{{img}}"
+        lazy-load
+      />
+      <view class="image-error" wx:if="{{imageErrors[idx]}}">图片加载失败</view>
+    </view>
+  </view>
+  
+  <!-- 底部信息 -->
+  <view class="card-footer">
+    <view class="footer-left">
+      <text class="reporter">报告人：{{report.reporter || '未知'}}</text>
+      <text class="reporter-id" wx:if="{{report.reporterId}}">（{{report.reporterId}}）</text>
+    </view>
+    <view class="footer-right" wx:if="{{showActions}}">
+      <view class="action-btn edit-btn" catchtap="handleEdit">编辑</view>
+      <view class="action-btn delete-btn" catchtap="handleDelete">删除</view>
+    </view>
+  </view>
+  
+  <!-- 选择框（管理员导出模式） -->
+  <view class="checkbox-wrapper" wx:if="{{showCheckbox}}" catchtap="handleCheck">
+    <view class="checkbox {{report.checked ? 'checked' : ''}}">
+      <text wx:if="{{report.checked}}">✓</text>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,93 @@
+<!-- pages/admin-edit/admin-edit.wxml - 管理员编辑（与report表单类似，但固定为编辑模式） -->
+<view class="page">
+    <view class="container">
+      <view class="page-title">编辑隐患记录</view>
+
+      <view class="form-card card">
+        <!-- 一级部门 -->
+        <view class="form-group">
+          <view class="form-label">一级部门</view>
+          <input class="form-input" placeholder="如：生产部"
+            value="{{formData.department1}}" bindinput="onFieldChange" data-field="department1" adjust-position="{{false}}"/>
+        </view>
+        <!-- 二级部门 -->
+        <view class="form-group">
+          <view class="form-label">二级部门</view>
+          <input class="form-input" placeholder="如：一车间"
+            value="{{formData.department2}}" bindinput="onFieldChange" data-field="department2" adjust-position="{{false}}"/>
+        </view>
+        <!-- 地点（必填） -->
+        <view class="form-group">
+          <view class="form-label required">地点</view>
+          <input class="form-input" placeholder="请输入地点"
+            value="{{formData.location}}" bindinput="onFieldChange" data-field="location" adjust-position="{{false}}"/>
+        </view>
+        <!-- 隐患照片 -->
+        <view class="form-section">
+          <image-uploader id="hazardPhotoUploader" label="隐患照片"
+            required="{{true}}" maxCount="{{9}}" showHint="{{true}}"
+            value="{{formData.hazardPhotos || []}}" bind:change="onHazardPhotosChange"/>
+        </view>
+        <!-- 隐患说明（必填） -->
+        <view class="form-group">
+          <view class="form-label required">隐患说明</view>
+          <textarea class="form-textarea" placeholder="请详细描述..."
+            value="{{formData.hazardDescription}}" bindinput="onFieldChange"
+            data-field="hazardDescription" maxlength="500" auto-height adjust-position="{{false}}"/>
+          <view class="char-count">{{formData.hazardDescription.length || 0}}/500</view>
+        </view>
+        <!-- 原因分析 -->
+        <view class="form-group">
+          <view class="form-label">隐患产生的原因分析</view>
+          <textarea class="form-textarea" placeholder="请分析隐患产生的可能原因..."
+            value="{{formData.causeAnalysis}}" bindinput="onFieldChange"
+            data-field="causeAnalysis" maxlength="500" auto-height adjust-position="{{false}}"/>
+          <view class="char-count">{{formData.causeAnalysis.length || 0}}/500</view>
+        </view>
+        <!-- 整改建议 -->
+        <view class="form-group">
+          <view class="form-label">建议整改措施/要求</view>
+          <textarea class="form-textarea" placeholder="请提出整改建议..."
+            value="{{formData.suggestedMeasures}}" bindinput="onFieldChange"
+            data-field="suggestedMeasures" maxlength="500" auto-height adjust-position="{{false}}"/>
+          <view class="char-count">{{formData.suggestedMeasures.length || 0}}/500</view>
+        </view>
+        <!-- 验收照片 -->
+        <view class="form-section">
+          <image-uploader id="acceptancePhotoUploader" label="验收照片"
+            required="{{true}}" maxCount="{{9}}" showHint="{{true}}"
+            value="{{formData.acceptancePhotos || []}}" bind:change="onAcceptancePhotosChange"/>
+        </view>
+        <!-- 验收人及验收时间 -->
+        <view class="form-group">
+          <view class="form-label required">验收人及验收时间</view>
+          <view class="acceptor-row">
+            <input class="form-input flex-2" placeholder="验收人姓名"
+              value="{{formData.acceptor}}" bindinput="onFieldChange" data-field="acceptor" adjust-position="{{false}}"/>
+            <picker mode="date" value="{{formData.acceptanceTime}}" bindchange="onAcceptanceTimeChange">
+              <view class="date-picker {{formData.acceptanceTime ? '' : 'placeholder'}}">
+                {{formData.acceptanceTime || '选择日期'}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <!-- 报告人（必填） -->
+        <view class="form-group">
+          <view class="form-label required">报告人</view>
+          <input class="form-input" placeholder="报告人姓名"
+            value="{{formData.reporter}}" bindinput="onFieldChange" data-field="reporter" adjust-position="{{false}}"/>
+        </view>
+        <!-- 报告人工号（必填） -->
+        <view class="form-group">
+          <view class="form-label required">报告人工号</view>
+          <input class="form-input" placeholder="报告人工号"
+            value="{{formData.reporterId}}" bindinput="onFieldChange" data-field="reporterId" adjust-position="{{false}}"/>
+        </view>
+      </view>
+
+      <view class="submit-section">
+        <button class="submit-btn" bindtap="handleSubmit" loading="{{submitting}}">保存修改</button>
+      </view>
+      <view style="height: 40rpx;"></view>
+    </view>
+</view>
